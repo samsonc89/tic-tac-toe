@@ -29,4 +29,9 @@
   width: calc(100% / 3);
   height: calc(100% / 3);
   border: 1px solid black;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10vw;
 }
