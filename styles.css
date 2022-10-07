@@ -13,8 +13,20 @@
   margin-top: 5%;
   position: relative;
   border: 1px solid black;
-  height: 0;
-  width: 50%;
-  padding-bottom: 50%;
+  /* aspect-ratio: 1/1; */
+  width: 50vw;
+  height: 50vw;
+  max-width: 450px;
+  max-height: 450px;
+
   justify-self: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.spot {
+  box-sizing: border-box;
+  width: calc(100% / 3);
+  height: calc(100% / 3);
+  border: 1px solid black;
 }
