@@ -2,3 +2,19 @@
   margin: 0;
   padding: 0;
 }
+
+#main-wrapper {
+  width: 80%;
+  display: grid;
+  justify-self: center;
+  margin: auto;
+}
+#gameboard-wrapper {
+  margin-top: 5%;
+  position: relative;
+  border: 1px solid black;
+  height: 0;
+  width: 50%;
+  padding-bottom: 50%;
+  justify-self: center;
+}
