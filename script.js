@@ -21,7 +21,7 @@ gameboard.board[2] = "J";
 // it outside as well
 const Player = (name, symbol) => {
   const playerName = () => name;
-  const playerSymbol = () => symbol;
+  const playerSymbol = symbol;
   function pickSquare() {
     console.log(this);
     //get the id and get the last digit and store into variable
@@ -48,7 +48,8 @@ const Player = (name, symbol) => {
   //symbol
   return { playerName, pickSquare, playerSymbol };
 };
-const player1 = Player("player1", "X");
+const player1 = Player("input", "X");
+const player2 = Player("Input", "O");
 
 let currentPlayer = player1;
 
