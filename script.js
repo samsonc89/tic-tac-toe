@@ -9,20 +9,20 @@ const gameboard = (() => {
   }
   let currentPlayer;
 
+  function changePlayer() {
+    if (gameboard.currentPlayer == player1) {
+      gameboard.currentPlayer = player2;
+    } else {
+      gameboard.currentPlayer = player1;
+    }
+    console.log(gameboard.currentPlayer.playerName);
+  }
+
   function markSquare() {
     gameboard.currentPlayer.pickSquare();
   }
-  return { board, updateBoard, currentPlayer, markSquare };
+  return { board, updateBoard, currentPlayer, markSquare, changePlayer };
 })();
-
-function changePlayer() {
-  if (gameboard.currentPlayer == player1) {
-    gameboard.currentPlayer = player2;
-  } else {
-    gameboard.currentPlayer = player1;
-  }
-  console.log(gameboard.currentPlayer.playerName);
-}
 
 const Player = (name, symbol) => {
   const playerName = name;
@@ -41,7 +41,7 @@ const Player = (name, symbol) => {
       console.log("Invalid Spot");
     }
     gameboard.updateBoard();
-    changePlayer();
+    gameboard.changePlayer();
   }
 
   return { playerName, pickSquare, playerSymbol };
