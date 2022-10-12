@@ -21,35 +21,45 @@ const gameboard = (() => {
   function markSquare() {
     gameboard.currentPlayer.pickSquare();
   }
-  return { board, updateBoard, currentPlayer, markSquare, changePlayer };
+
+  const Player = (name, symbol) => {
+    const playerName = name;
+    const playerSymbol = symbol;
+    function pickSquare() {
+      console.log(event.target);
+      //get the id and get the last digit and store into variable
+      let boardIndex = Number(event.target.id[event.target.id.length - 1]);
+
+      //get the index of the board array using the variable
+      //check if spot is blank, mark it
+      if (gameboard.board[boardIndex] === "") {
+        gameboard.board[boardIndex] = playerSymbol;
+        console.log(gameboard.board);
+      } else {
+        console.log("Invalid Spot");
+      }
+      gameboard.updateBoard();
+      gameboard.changePlayer();
+    }
+
+    return { playerName, pickSquare, playerSymbol };
+  };
+
+  const player1 = Player("player1", "X");
+  const player2 = Player("player2", "O");
+
+  return {
+    board,
+    updateBoard,
+    currentPlayer,
+    markSquare,
+    changePlayer,
+    player1,
+    player2,
+  };
 })();
 
-const Player = (name, symbol) => {
-  const playerName = name;
-  const playerSymbol = symbol;
-  function pickSquare() {
-    console.log(event.target);
-    //get the id and get the last digit and store into variable
-    let boardIndex = Number(event.target.id[event.target.id.length - 1]);
-
-    //get the index of the board array using the variable
-    //check if spot is blank, mark it
-    if (gameboard.board[boardIndex] === "") {
-      gameboard.board[boardIndex] = playerSymbol;
-      console.log(gameboard.board);
-    } else {
-      console.log("Invalid Spot");
-    }
-    gameboard.updateBoard();
-    gameboard.changePlayer();
-  }
-
-  return { playerName, pickSquare, playerSymbol };
-};
-const player1 = Player("player1", "A");
-const player2 = Player("player2", "O");
-
-gameboard.currentPlayer = player1;
+gameboard.currentPlayer = gameboard.player1;
 
 document.querySelectorAll(".spot").forEach((spot) => {
   spot.addEventListener("click", gameboard.markSquare);
