@@ -1,58 +1,58 @@
 "use strict";
 
 const gameboard = (() => {
-  const board = ["1", "", "", "1", "", "", "1", "", ""];
+  const board = ["", "", "", "", "", "", "", "", ""];
   function updateBoard() {
     for (let i = 0; i < board.length; i++) {
       document.querySelector(`#spot${i}`).textContent = board[i];
     }
   }
   let currentPlayer;
-  return { board, updateBoard, currentPlayer };
+
+  function markSquare() {
+    gameboard.currentPlayer.pickSquare();
+  }
+  return { board, updateBoard, currentPlayer, markSquare };
 })();
 
-// console.log(gameboard);
-gameboard.board[2] = "J";
-// gameboard.updateBoard();
+function changePlayer() {
+  if (gameboard.currentPlayer == player1) {
+    gameboard.currentPlayer = player2;
+  } else {
+    gameboard.currentPlayer = player1;
+  }
+  console.log(gameboard.currentPlayer.playerName);
+}
 
-//player1.play(0) would change spot0
-
-//if I set player within the Game object, I need to be able to call
-// it outside as well
 const Player = (name, symbol) => {
-  const playerName = () => name;
+  const playerName = name;
   const playerSymbol = symbol;
   function pickSquare() {
-    console.log(this);
+    console.log(event.target);
     //get the id and get the last digit and store into variable
-    let boardIndex = Number(this.id[this.id.length - 1]);
+    let boardIndex = Number(event.target.id[event.target.id.length - 1]);
 
     //get the index of the board array using the variable
     //check if spot is blank, mark it
     if (gameboard.board[boardIndex] === "") {
-      gameboard.board[boardIndex] = symbol;
+      gameboard.board[boardIndex] = playerSymbol;
       console.log(gameboard.board);
     } else {
       console.log("Invalid Spot");
     }
     gameboard.updateBoard();
-    //if that position has a value, return
-
-    //how do you get the current player?
-
-    //switch players
+    changePlayer();
   }
 
-  //score
-
-  //symbol
   return { playerName, pickSquare, playerSymbol };
 };
-const player1 = Player("input", "X");
-const player2 = Player("Input", "O");
+const player1 = Player("player1", "A");
+const player2 = Player("player2", "O");
 
-let currentPlayer = player1;
+gameboard.currentPlayer = player1;
 
 document.querySelectorAll(".spot").forEach((spot) => {
-  spot.addEventListener("click", currentPlayer.pickSquare);
+  spot.addEventListener("click", gameboard.markSquare);
 });
+
+//How should I set the current player
