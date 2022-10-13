@@ -79,3 +79,15 @@ const winningArray = [
   [3, 4, 5],
   [6, 7, 8],
 ];
+//go through each element in the winning array and check if it's within testArr
+function checkArray(array) {
+  // Each of the nested arrays in winningArray
+  for (const winningCombination of winningArray) {
+    // Every number in the winningCombination is also in the provided array
+    if (winningCombination.every((element) => array.includes(element))) {
+      return true;
+    }
+  }
+  // No complete match
+  return false;
+}
