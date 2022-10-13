@@ -51,6 +51,7 @@ const gameboard = (() => {
   const player1 = Player("player1", "X");
   const player2 = Player("player2", "O");
 
+  currentPlayer = player1;
   return {
     board,
     updateBoard,
@@ -62,27 +63,24 @@ const gameboard = (() => {
   };
 })();
 
-gameboard.currentPlayer = gameboard.player1;
-
 document.querySelectorAll(".spot").forEach((spot) => {
   spot.addEventListener("click", gameboard.markSquare);
 });
 
-//How should I set the current player
-const winningArray = [
-  [0, 1, 2],
-  [0, 3, 6],
-  [0, 4, 8],
-  [1, 4, 7],
-  [2, 4, 6],
-  [2, 5, 8],
-  [3, 4, 5],
-  [6, 7, 8],
-];
 //go through each element in the winning array and check if it's within testArr
 function checkArray(array) {
+  const winningCombinations = [
+    [0, 1, 2],
+    [0, 3, 6],
+    [0, 4, 8],
+    [1, 4, 7],
+    [2, 4, 6],
+    [2, 5, 8],
+    [3, 4, 5],
+    [6, 7, 8],
+  ];
   // Each of the nested arrays in winningArray
-  for (const winningCombination of winningArray) {
+  for (const winningCombination of winningCombinations) {
     // Every number in the winningCombination is also in the provided array
     if (winningCombination.every((element) => array.includes(element))) {
       return true;
