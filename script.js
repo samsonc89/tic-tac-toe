@@ -37,7 +37,7 @@ const gameboard = (() => {
       if (gameboard.board[boardIndex] === "") {
         gameboard.board[boardIndex] = playerSymbol;
         playerArray.push(boardIndex);
-        console.log(gameboard.board, playerArray);
+        console.log(checkArray(playerArray));
       } else {
         console.log("Invalid Spot");
       }
