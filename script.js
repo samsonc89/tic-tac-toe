@@ -25,6 +25,8 @@ const gameboard = (() => {
   const Player = (name, symbol) => {
     const playerName = name;
     const playerSymbol = symbol;
+    const playerArray = [];
+
     function pickSquare() {
       console.log(event.target);
       //get the id and get the last digit and store into variable
@@ -34,7 +36,8 @@ const gameboard = (() => {
       //check if spot is blank, mark it
       if (gameboard.board[boardIndex] === "") {
         gameboard.board[boardIndex] = playerSymbol;
-        console.log(gameboard.board);
+        playerArray.push(boardIndex);
+        console.log(gameboard.board, playerArray);
       } else {
         console.log("Invalid Spot");
       }
@@ -66,3 +69,13 @@ document.querySelectorAll(".spot").forEach((spot) => {
 });
 
 //How should I set the current player
+const winningArray = [
+  [0, 1, 2],
+  [0, 3, 6],
+  [0, 4, 8],
+  [1, 4, 7],
+  [2, 4, 6],
+  [2, 5, 8],
+  [3, 4, 5],
+  [6, 7, 8],
+];
