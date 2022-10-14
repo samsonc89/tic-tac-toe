@@ -40,14 +40,21 @@ const gameboard = (() => {
       //check if spot is blank, mark it
       if (gameboard.board[boardIndex] === "") {
         gameboard.board[boardIndex] = playerSymbol;
-        //Add the index to array to check for winning combination
         playerArray.push(boardIndex);
+<<<<<<< HEAD
         gameboard.changePlayer();
+=======
+        console.log(checkArray(playerArray));
+>>>>>>> parent of 7b85d76 (Add function to alert player name with first letter capitalized)
       } else {
         console.log("Invalid Spot");
       }
       gameboard.updateBoard();
+<<<<<<< HEAD
       console.log(checkForWinner(playerArray));
+=======
+      gameboard.changePlayer();
+>>>>>>> parent of 7b85d76 (Add function to alert player name with first letter capitalized)
     }
 
     return { playerName, pickSquare, playerSymbol, playerArray };
@@ -72,6 +79,7 @@ const gameboard = (() => {
     currentPlayer,
     markSquare,
     changePlayer,
+<<<<<<< HEAD
     winner,
     player1,
     player2,
@@ -84,9 +92,19 @@ gameboard.init();
 //   spot.addEventListener("click", gameboard.markSquare);
 // });
 gridBox.forEach((spot) => spot.addEventListener("click", gameboard.markSquare));
+=======
+    player1,
+    player2,
+  };
+})();
+
+document.querySelectorAll(".spot").forEach((spot) => {
+  spot.addEventListener("click", gameboard.markSquare);
+});
+>>>>>>> parent of 7b85d76 (Add function to alert player name with first letter capitalized)
 
 //go through each element in the winning array and check if it's within testArr
-function checkForWinner(array) {
+function checkArray(array) {
   const winningCombinations = [
     [0, 1, 2],
     [0, 3, 6],
@@ -97,6 +115,7 @@ function checkForWinner(array) {
     [3, 4, 5],
     [6, 7, 8],
   ];
+<<<<<<< HEAD
   if (gameboard.winner != false)
     // Each of the nested arrays in winningArray
     for (const winningCombination of winningCombinations) {
@@ -111,6 +130,13 @@ function checkForWinner(array) {
         gameboard.winner = gameboard.currentPlayer;
         console.log(gameboard.winner);
       }
+=======
+  // Each of the nested arrays in winningArray
+  for (const winningCombination of winningCombinations) {
+    // Every number in the winningCombination is also in the provided array
+    if (winningCombination.every((element) => array.includes(element))) {
+      return true;
+>>>>>>> parent of 7b85d76 (Add function to alert player name with first letter capitalized)
     }
   // No complete match
   return false;
