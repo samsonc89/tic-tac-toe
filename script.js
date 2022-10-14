@@ -42,12 +42,12 @@ const gameboard = (() => {
         gameboard.board[boardIndex] = playerSymbol;
         //Add the index to array to check for winning combination
         playerArray.push(boardIndex);
+        gameboard.changePlayer();
       } else {
         console.log("Invalid Spot");
       }
       gameboard.updateBoard();
       console.log(checkForWinner(playerArray));
-      gameboard.changePlayer();
     }
 
     return { playerName, pickSquare, playerSymbol, playerArray };
@@ -56,7 +56,6 @@ const gameboard = (() => {
   const player1 = Player("player1", "X");
   const player2 = Player("player2", "O");
 
-  currentPlayer = player1;
   function init() {
     gameboard.winner = "";
     gameboard.currentPlayer = gameboard.player1;
@@ -79,7 +78,7 @@ const gameboard = (() => {
     init,
   };
 })();
-
+gameboard.init();
 //
 // document.querySelectorAll(".spot").forEach((spot) => {
 //   spot.addEventListener("click", gameboard.markSquare);
