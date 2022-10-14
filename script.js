@@ -1,13 +1,17 @@
 "use strict";
 
+const gridBox = document.querySelectorAll(".spot");
+
 const gameboard = (() => {
-  const board = ["", "", "", "", "", "", "", "", ""];
+  let board = ["", "", "", "", "", "", "", "", ""];
   function updateBoard() {
-    for (let i = 0; i < board.length; i++) {
-      document.querySelector(`#spot${i}`).textContent = board[i];
-    }
+    // for (let i = 0; i < board.length; i++) {
+    //   document.querySelector(`#spot${i}`).textContent = board[i];
+    // }
+    gridBox.forEach((grid, i) => (grid.textContent = gameboard.board[i]));
   }
   let currentPlayer;
+  let winner;
 
   function changePlayer() {
     if (gameboard.currentPlayer == player1) {
@@ -18,7 +22,6 @@ const gameboard = (() => {
     console.log(gameboard.currentPlayer.playerName);
   }
 
-  //
   function markSquare() {
     gameboard.currentPlayer.pickSquare();
   }
@@ -47,26 +50,41 @@ const gameboard = (() => {
       gameboard.changePlayer();
     }
 
-    return { playerName, pickSquare, playerSymbol };
+    return { playerName, pickSquare, playerSymbol, playerArray };
   };
 
   const player1 = Player("player1", "X");
   const player2 = Player("player2", "O");
 
   currentPlayer = player1;
+  function init() {
+    gameboard.winner = "";
+    gameboard.currentPlayer = gameboard.player1;
+    gameboard.board = ["", "", "", "", "", "", "", "", ""];
+    gameboard.player1.playerArray = [];
+    gameboard.player2.playerArray = [];
+    gameboard.updateBoard();
+    // clearBoard();
+  }
+
   return {
     board,
     updateBoard,
     currentPlayer,
     markSquare,
     changePlayer,
+    winner,
+    player1,
+    player2,
+    init,
   };
 })();
 
 //
-document.querySelectorAll(".spot").forEach((spot) => {
-  spot.addEventListener("click", gameboard.markSquare);
-});
+// document.querySelectorAll(".spot").forEach((spot) => {
+//   spot.addEventListener("click", gameboard.markSquare);
+// });
+gridBox.forEach((spot) => spot.addEventListener("click", gameboard.markSquare));
 
 //go through each element in the winning array and check if it's within testArr
 function checkForWinner(array) {
@@ -80,19 +98,21 @@ function checkForWinner(array) {
     [3, 4, 5],
     [6, 7, 8],
   ];
-
-  // Each of the nested arrays in winningArray
-  for (const winningCombination of winningCombinations) {
-    // Every number in the winningCombination is also in the provided array
-    if (winningCombination.every((element) => array.includes(element))) {
-      alert(
-        ` ${
-          gameboard.currentPlayer.playerName[0].toUpperCase() +
-          gameboard.currentPlayer.playerName.substring(1)
-        } Wins`
-      );
+  if (gameboard.winner != false)
+    // Each of the nested arrays in winningArray
+    for (const winningCombination of winningCombinations) {
+      // Every number in the winningCombination is also in the provided array
+      if (winningCombination.every((element) => array.includes(element))) {
+        alert(
+          ` ${
+            gameboard.currentPlayer.playerName[0].toUpperCase() +
+            gameboard.currentPlayer.playerName.substring(1)
+          } Wins`
+        );
+        gameboard.winner = gameboard.currentPlayer;
+        console.log(gameboard.winner);
+      }
     }
-  }
   // No complete match
   return false;
 }
