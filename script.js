@@ -41,6 +41,8 @@ function checkForWinner(array) {
     // Every number in the winningCombination is also in the provided array
     if (winningCombination.every((element) => array.includes(element))) {
       winner = currentPlayer;
+      currentPlayer.playerScore++;
+      console.log(currentPlayer.playerScore);
       alert(`${winner.playerName} Wins`);
     }
   }
@@ -61,6 +63,7 @@ const Player = (name, symbol) => {
   const playerName = name;
   const playerSymbol = symbol;
   let playerArray = [];
+  let playerScore = 0;
 
   function pickSquare() {
     //get the id and get the last digit and store into variable
@@ -70,18 +73,24 @@ const Player = (name, symbol) => {
     if (board[boardIndex] === "") {
       board[boardIndex] = playerSymbol;
       playerArray.push(boardIndex);
+      checkForWinner(playerArray);
+      changePlayer();
     } else {
       console.log("Invalid square");
     }
-    console.log(checkForWinner(playerArray));
-    changePlayer();
     updateBoard();
   }
   function resetPlayerArray() {
     playerArray = [];
   }
 
-  return { playerName, pickSquare, playerSymbol, resetPlayerArray };
+  return {
+    playerName,
+    pickSquare,
+    playerSymbol,
+    resetPlayerArray,
+    playerScore,
+  };
 };
 
 const player1 = Player("player1", "X");
