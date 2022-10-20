@@ -3,7 +3,7 @@
 const gridBox = document.querySelectorAll(".square");
 
 let currentPlayer;
-let winner;
+let winner = "";
 let board = ["", "", "", "", "", "", "", "", ""];
 
 function updateBoard() {
@@ -19,7 +19,9 @@ function changePlayer() {
 }
 
 function markSquare() {
-  currentPlayer.pickSquare();
+  if (winner === "") {
+    currentPlayer.pickSquare();
+  }
 }
 
 function checkForWinner(array) {
