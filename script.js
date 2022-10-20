@@ -42,8 +42,10 @@ function checkForWinner(array) {
     if (winningCombination.every((element) => array.includes(element))) {
       winner = currentPlayer;
       currentPlayer.playerScore++;
-      console.log(currentPlayer.playerScore);
-      alert(`${winner.playerName} Wins`);
+      document.querySelector(
+        `#${currentPlayer.playerPosition}-score`
+      ).textContent = `${currentPlayer.playerScore}`;
+      alert(`${winner.playerPosition} Wins`);
     }
   }
   // No complete match
@@ -59,8 +61,9 @@ function init() {
   winner = "";
 }
 
-const Player = (name, symbol) => {
-  const playerName = name;
+const Player = (position, symbol, alias = "None") => {
+  const playerAlias = alias;
+  const playerPosition = position;
   const playerSymbol = symbol;
   let playerArray = [];
   let playerScore = 0;
@@ -85,7 +88,8 @@ const Player = (name, symbol) => {
   }
 
   return {
-    playerName,
+    playerAlias,
+    playerPosition,
     pickSquare,
     playerSymbol,
     resetPlayerArray,
