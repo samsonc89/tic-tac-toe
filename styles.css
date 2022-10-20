@@ -24,7 +24,7 @@
   flex-wrap: wrap;
 }
 
-.spot {
+.square {
   box-sizing: border-box;
   width: calc(100% / 3);
   height: calc(100% / 3);

@@ -11,16 +11,20 @@
   <body>
     <div id="main-wrapper">
       <div id="choice-modal"></div>
+      <div id="winner-modal">
+        <div class="modal-content"></div>
+      </div>
+
       <div id="gameboard-wrapper">
-        <div class="spot" id="spot0"></div>
-        <div class="spot" id="spot1"></div>
-        <div class="spot" id="spot2"></div>
-        <div class="spot" id="spot3"></div>
-        <div class="spot" id="spot4"></div>
-        <div class="spot" id="spot5"></div>
-        <div class="spot" id="spot6"></div>
-        <div class="spot" id="spot7"></div>
-        <div class="spot" id="spot8"></div>
+        <div class="square" id="square0"></div>
+        <div class="square" id="square1"></div>
+        <div class="square" id="square2"></div>
+        <div class="square" id="square3"></div>
+        <div class="square" id="square4"></div>
+        <div class="square" id="square5"></div>
+        <div class="square" id="square6"></div>
+        <div class="square" id="square7"></div>
+        <div class="square" id="square8"></div>
       </div>
       <div id="players-wrapper">
         <div id="player1-wrapper"></div>
@@ -30,7 +34,9 @@
       <div id="extras-wrapper">
         <div id="scoreboard"></div>
         <div id="winner-msg"></div>
-        <div id="reset-wrapper"></div>
+        <div id="reset-wrapper">
+          <button id="reset" onclick="gameboard.init()">Reset</button>
+        </div>
       </div>
     </div>
   </body>
