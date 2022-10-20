@@ -27,15 +27,19 @@
         <div class="square" id="square8"></div>
       </div>
       <div id="players-wrapper">
-        <div id="player1-wrapper"></div>
+        <div id="player1-wrapper">
+          <div id="player1-score">0</div>
+        </div>
         <div id="vs"></div>
-        <div id="player2-wrapper"></div>
+        <div id="player2-wrapper">
+          <div id="player2-score">0</div>
+        </div>
       </div>
       <div id="extras-wrapper">
         <div id="scoreboard"></div>
         <div id="winner-msg"></div>
         <div id="reset-wrapper">
-          <button id="reset" onclick="gameboard.init()">Reset</button>
+          <button id="reset" onclick="init()">Reset</button>
         </div>
       </div>
     </div>
