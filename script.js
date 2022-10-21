@@ -1,6 +1,7 @@
 "use strict";
 
 const gridBox = document.querySelectorAll(".square");
+const winnerMsg = document.querySelector("#winner-msg");
 
 let currentPlayer;
 let winner = "";
@@ -45,7 +46,7 @@ function checkForWinner(array) {
       document.querySelector(
         `#${currentPlayer.playerPosition}-score`
       ).textContent = `${currentPlayer.playerScore}`;
-      alert(`${winner.playerPosition} Wins`);
+      winnerMsg.innerHTML = `${winner.playerPosition} Wins`;
     }
   }
   // No complete match
