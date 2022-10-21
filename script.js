@@ -62,9 +62,9 @@ function init() {
 }
 
 const Player = (position, symbol, alias = "None") => {
-  const playerAlias = alias;
   const playerPosition = position;
   const playerSymbol = symbol;
+  const playerAlias = alias;
   let playerArray = [];
   let playerScore = 0;
 
@@ -104,3 +104,10 @@ currentPlayer = player1;
 //go through each element in the winning array and check if it's within testArr
 
 gridBox.forEach((square) => square.addEventListener("click", markSquare));
+
+document.querySelector("#test").addEventListener("click", (e) => {
+  e.preventDefault();
+  document.querySelector("#player1-name").innerHTML = document.querySelector(
+    "#player1-alias-input"
+  ).value;
+});
