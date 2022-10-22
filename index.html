@@ -14,7 +14,7 @@
         <div id="selection-wrapper">
           <div class="selection">
             <div class="avatar-wrapper"><img src="" /></div>
-            <br />
+            <h3>Player 1</h3>
             <input
               class="alias-input"
               placeholder="Player Name"
@@ -23,22 +23,26 @@
           </div>
           <div class="selection">
             <div class="avatar-wrapper"><img src="" /></div>
-            <button id="human-selection">Human</button>
-            <button id="computer-selection">Computer</button><br />
+            <h3 id="opponent-title">Player 2</h3>
             <input
               class="alias-input"
               placeholder="Player Name"
               id="player2-alias-input"
             />
+            <div id="computer-choices">
+              <button id="computer-easy">Easy</button>
+              <button id="computer-impossible">Impossible</button>
+            </div>
           </div>
         </div>
         <button id="play-btn">Play</button>
+        <button class="change-players">Change Players</button>
       </div>
     </div>
     <div id="choice-modal">
       <div class="modal-content">
-        <button class="setup-btn" id="pvp">PVP</button>
-        <button class="setup-btn" id="pvc">PVC</button>
+        <button class="setup-btn" id="pvp" onclick="playPlayer()">PVP</button>
+        <button class="setup-btn" id="pvc" onclick="playComputer()">PVC</button>
       </div>
     </div>
     <div id="main-wrapper">
@@ -67,8 +71,8 @@
       <div id="extras-wrapper">
         <div id="winner-msg"></div>
         <div id="reset-wrapper">
-          <button id="reset" onclick="init()">Reset</button>
-          <button id="change-players">Change Players</button>
+          <button id="reset" onclick="clearBoard()">Reset</button>
+          <button class="change-players">Change Players</button>
         </div>
       </div>
     </div>

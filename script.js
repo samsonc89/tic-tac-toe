@@ -72,7 +72,7 @@ function checkForWinner(array) {
   return false;
 }
 
-function init() {
+function clearBoard() {
   board = ["", "", "", "", "", "", "", "", ""];
   updateBoard();
   player1.resetPlayerArray();
