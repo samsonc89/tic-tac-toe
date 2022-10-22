@@ -148,8 +148,8 @@ const Player = (position, symbol, alias) => {
     resetPlayerScore,
   };
 };
-const player1 = Player("player1", "X");
-const player2 = Player("player2", "O");
+const player1 = Player("player1", "X", "Player 1");
+const player2 = Player("player2", "O", "Player 2");
 
 currentPlayer = whoGoesFirst = player1;
 
@@ -166,16 +166,14 @@ playBtn.addEventListener("click", (e) => {
   const player2Input = document.querySelector("#player2-alias-input");
   e.preventDefault();
   selectionModal.style.display = "none";
-  player1Name.innerHTML =
+  player1Name.innerHTML = player1.playerAlias =
     player1Input.value != "" ? player1Input.value : "Player 1";
-  player1.playerAlias = player1Input.value;
 
   switch (playerChoice) {
     case "human":
-      player2Name.innerHTML =
+      player2Name.innerHTML = player2.playerAlias =
         player2Input.value != "" ? player2Input.value : "Player 2";
 
-      player2.playerAlias = player2Input.value;
       break;
     case "computer":
       player2Name.innerHTML = "Computer";
