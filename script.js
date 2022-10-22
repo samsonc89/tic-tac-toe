@@ -5,6 +5,7 @@ const winnerMsg = document.querySelector("#winner-msg");
 const playBtn = document.querySelector("#play-btn");
 const selectionModal = document.querySelector("#selection-modal");
 const choiceModal = document.querySelector("#choice-modal");
+const player2Name = document.querySelector("#player2-name");
 let playerChoice;
 let currentPlayer;
 let winner = "";
@@ -22,11 +23,14 @@ function playPlayer() {
   playerChoice = "human";
   hideChoiceModal();
   document.querySelector("#computer-choices").style.display = "none";
+  document.querySelector("#opponent-title").innerHTML = "Player 2";
+  document.querySelector("#player2-alias-input").style.display = "block";
 }
 function playComputer() {
   playerChoice = "computer";
   hideChoiceModal();
   document.querySelector("#opponent-title").innerHTML = "Computer";
+  document.querySelector("#computer-choices").style.display = "block";
   document.querySelector("#player2-alias-input").style.display = "none";
 }
 
@@ -155,10 +159,10 @@ playBtn.addEventListener("click", (e) => {
   switch (playerChoice) {
     case "human":
       const player2Input = document.querySelector("#player2-alias-input");
-      document.querySelector("#player2-name").innerHTML =
+      player2Name.innerHTML =
         player2Input.value != "" ? player2Input.value : "Player 2";
       break;
     case "computer":
-      document.querySelector("#player2-name").innerHTML = "Computer";
+      player2Name.innerHTML = "Computer";
   }
 });
