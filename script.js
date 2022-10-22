@@ -26,6 +26,13 @@ const gameboard = (() => {
     winner = "";
     winnerMsg.innerHTML = "";
   }
+  function changePlayer() {
+    if (currentPlayer == gameboard.player1) {
+      currentPlayer = gameboard.player2;
+    } else {
+      currentPlayer = gameboard.player1;
+    }
+  }
 
   const Player = (position, symbol, name) => {
     const playerPosition = position;
@@ -64,8 +71,42 @@ const gameboard = (() => {
       resetPlayerArray,
       playerScore,
       resetPlayerScore,
+      playerArray,
     };
   };
+
+  function checkForWinner(array) {
+    const winningCombinations = [
+      [0, 1, 2],
+      [0, 3, 6],
+      [0, 4, 8],
+      [1, 4, 7],
+      [2, 4, 6],
+      [2, 5, 8],
+      [3, 4, 5],
+      [6, 7, 8],
+    ];
+
+    // Each of the nested arrays in winningArray
+    for (const winningCombination of winningCombinations) {
+      // Every number in the winningCombination is also in the provided array
+      if (winningCombination.every((element) => array.includes(element))) {
+        winner = currentPlayer;
+        currentPlayer.playerScore++;
+        document.querySelector(
+          `#${currentPlayer.playerPosition}-score`
+        ).textContent = `${currentPlayer.playerScore}`;
+        winnerMsg.innerHTML = currentPlayer.playerName + " Wins";
+
+        // `${
+        //   winner.playerPosition[0].toUpperCase() +
+        //   winner.playerPosition.substring(1)
+        // } Wins`;
+      }
+    }
+    // No complete match
+    return false;
+  }
 
   const player1 = Player("player1", "X", "Player 1");
   const player2 = Player("player2", "O", "Player 2");
@@ -93,55 +134,14 @@ const displayController = (() => {
     document.querySelector("#computer-choices").style.display = "block";
     document.querySelector("#player2-name-input").style.display = "none";
   }
-  return { updateBoard, playComputer, playPlayer };
-})();
 
-function changePlayer() {
-  if (currentPlayer == gameboard.player1) {
-    currentPlayer = gameboard.player2;
-  } else {
-    currentPlayer = gameboard.player1;
-  }
-}
-
-function markSquare() {
-  if (winner === "") {
-    currentPlayer.pickSquare();
-  }
-}
-
-function checkForWinner(array) {
-  const winningCombinations = [
-    [0, 1, 2],
-    [0, 3, 6],
-    [0, 4, 8],
-    [1, 4, 7],
-    [2, 4, 6],
-    [2, 5, 8],
-    [3, 4, 5],
-    [6, 7, 8],
-  ];
-
-  // Each of the nested arrays in winningArray
-  for (const winningCombination of winningCombinations) {
-    // Every number in the winningCombination is also in the provided array
-    if (winningCombination.every((element) => array.includes(element))) {
-      winner = currentPlayer;
-      currentPlayer.playerScore++;
-      document.querySelector(
-        `#${currentPlayer.playerPosition}-score`
-      ).textContent = `${currentPlayer.playerScore}`;
-      winnerMsg.innerHTML = currentPlayer.playerName + " Wins";
-
-      // `${
-      //   winner.playerPosition[0].toUpperCase() +
-      //   winner.playerPosition.substring(1)
-      // } Wins`;
+  function markSquare() {
+    if (winner === "") {
+      currentPlayer.pickSquare();
     }
   }
-  // No complete match
-  return false;
-}
+  return { updateBoard, playComputer, playPlayer, markSquare };
+})();
 
 function reset() {
   gameboard.clearBoard();
@@ -156,51 +156,13 @@ function reset() {
     .forEach((score) => (score.innerHTML = 0));
 }
 
-const Player = (position, symbol, name) => {
-  const playerPosition = position;
-  const playerSymbol = symbol;
-  let playerName = name;
-  let playerArray = [];
-  let playerScore = 0;
-
-  function pickSquare() {
-    //get the id and get the last digit and store into variable
-    let boardIndex = Number(event.target.id[event.target.id.length - 1]);
-    //get the index of the board array using the variable
-    //check if square is blank, mark it
-    if (board[boardIndex] === "") {
-      board[boardIndex] = playerSymbol;
-      playerArray.push(boardIndex);
-      checkForWinner(playerArray);
-      changePlayer();
-    } else {
-      console.log("Invalid square");
-    }
-    displayController.updateBoard();
-  }
-  function resetPlayerArray() {
-    playerArray = [];
-  }
-  function resetPlayerScore() {
-    playerScore = 0;
-  }
-
-  return {
-    playerName,
-    playerPosition,
-    pickSquare,
-    playerSymbol,
-    resetPlayerArray,
-    playerScore,
-    resetPlayerScore,
-  };
-};
-
 currentPlayer = whoGoesFirst = gameboard.player1;
 
 //go through each element in the winning array and check if it's within testArr
 
-gridBox.forEach((square) => square.addEventListener("click", markSquare));
+gridBox.forEach((square) =>
+  square.addEventListener("click", displayController.markSquare)
+);
 
 document
   .querySelectorAll(".change-players")
