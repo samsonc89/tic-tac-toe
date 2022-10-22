@@ -112,9 +112,9 @@ currentPlayer = player1;
 gridBox.forEach((square) => square.addEventListener("click", markSquare));
 
 playBtn.addEventListener("click", (e) => {
+  const player1Input = document.querySelector("#player1-alias-input");
   e.preventDefault();
   selectionModal.style.display = "none";
-  document.querySelector("#player1-name").innerHTML = document.querySelector(
-    "#player1-alias-input"
-  ).value;
+  document.querySelector("#player1-name").innerHTML =
+    player1Input.value != "" ? player1Input.value : "Player 1";
 });
