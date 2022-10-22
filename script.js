@@ -5,6 +5,7 @@ const winnerMsg = document.querySelector("#winner-msg");
 const playBtn = document.querySelector("#play-btn");
 const selectionModal = document.querySelector("#selection-modal");
 const choiceModal = document.querySelector("#choice-modal");
+let playerChoice;
 let currentPlayer;
 let winner = "";
 let board = ["", "", "", "", "", "", "", "", ""];
@@ -18,10 +19,12 @@ function hideChoiceModal() {
 }
 
 function playPlayer() {
+  playerChoice = "human";
   hideChoiceModal();
   document.querySelector("#computer-choices").style.display = "none";
 }
 function playComputer() {
+  playerChoice = "computer";
   hideChoiceModal();
   document.querySelector("#opponent-title").innerHTML = "Computer";
   document.querySelector("#player2-alias-input").style.display = "none";
@@ -82,6 +85,15 @@ function clearBoard() {
   winnerMsg.innerHTML = "";
 }
 
+function reset() {
+  clearBoard();
+  playerChoice = "";
+  player1.resetPlayerScore();
+  player2.resetPlayerScore();
+  selectionModal.style.display = "block";
+  choiceModal.style.display = "block";
+}
+
 const Player = (position, symbol, alias) => {
   const playerPosition = position;
   const playerSymbol = symbol;
@@ -107,6 +119,9 @@ const Player = (position, symbol, alias) => {
   function resetPlayerArray() {
     playerArray = [];
   }
+  function resetPlayerScore() {
+    playerScore = 0;
+  }
 
   return {
     playerAlias,
@@ -115,6 +130,7 @@ const Player = (position, symbol, alias) => {
     playerSymbol,
     resetPlayerArray,
     playerScore,
+    resetPlayerScore,
   };
 };
 
@@ -125,6 +141,9 @@ currentPlayer = player1;
 //go through each element in the winning array and check if it's within testArr
 
 gridBox.forEach((square) => square.addEventListener("click", markSquare));
+document
+  .querySelectorAll(".change-players")
+  .forEach((button) => button.addEventListener("click", reset));
 
 playBtn.addEventListener("click", (e) => {
   const player1Input = document.querySelector("#player1-alias-input");
@@ -132,4 +151,14 @@ playBtn.addEventListener("click", (e) => {
   selectionModal.style.display = "none";
   document.querySelector("#player1-name").innerHTML =
     player1Input.value != "" ? player1Input.value : "Player 1";
+
+  switch (playerChoice) {
+    case "human":
+      const player2Input = document.querySelector("#player2-alias-input");
+      document.querySelector("#player2-name").innerHTML =
+        player2Input.value != "" ? player2Input.value : "Player 2";
+      break;
+    case "computer":
+      document.querySelector("#player2-name").innerHTML = "Computer";
+  }
 });
