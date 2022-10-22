@@ -46,7 +46,10 @@ function checkForWinner(array) {
       document.querySelector(
         `#${currentPlayer.playerPosition}-score`
       ).textContent = `${currentPlayer.playerScore}`;
-      winnerMsg.innerHTML = `${winner.playerPosition} Wins`;
+      winnerMsg.innerHTML = `${
+        winner.playerPosition[0].toUpperCase() +
+        winner.playerPosition.substring(1)
+      } Wins`;
     }
   }
   // No complete match
@@ -60,9 +63,10 @@ function init() {
   player2.resetPlayerArray();
   currentPlayer = player1;
   winner = "";
+  winnerMsg.innerHTML = "";
 }
 
-const Player = (position, symbol, alias = "None") => {
+const Player = (position, symbol, alias) => {
   const playerPosition = position;
   const playerSymbol = symbol;
   const playerAlias = alias;
@@ -106,9 +110,9 @@ currentPlayer = player1;
 
 gridBox.forEach((square) => square.addEventListener("click", markSquare));
 
-document.querySelector("#test").addEventListener("click", (e) => {
-  e.preventDefault();
-  document.querySelector("#player1-name").innerHTML = document.querySelector(
-    "#player1-alias-input"
-  ).value;
-});
+// document.querySelector("#test").addEventListener("click", (e) => {
+//   e.preventDefault();
+//   document.querySelector("#player1-name").innerHTML = document.querySelector(
+//     "#player1-alias-input"
+//   ).value;
+// });
