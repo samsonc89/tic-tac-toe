@@ -2,7 +2,8 @@
 
 const gridBox = document.querySelectorAll(".square");
 const winnerMsg = document.querySelector("#winner-msg");
-
+const playBtn = document.querySelector("#play-btn");
+const selectionModal = document.querySelector("#selection-modal");
 let currentPlayer;
 let winner = "";
 let board = ["", "", "", "", "", "", "", "", ""];
@@ -110,9 +111,10 @@ currentPlayer = player1;
 
 gridBox.forEach((square) => square.addEventListener("click", markSquare));
 
-// document.querySelector("#test").addEventListener("click", (e) => {
-//   e.preventDefault();
-//   document.querySelector("#player1-name").innerHTML = document.querySelector(
-//     "#player1-alias-input"
-//   ).value;
-// });
+playBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  selectionModal.style.display = "none";
+  document.querySelector("#player1-name").innerHTML = document.querySelector(
+    "#player1-alias-input"
+  ).value;
+});
