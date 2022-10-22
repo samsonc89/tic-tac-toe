@@ -4,12 +4,27 @@ const gridBox = document.querySelectorAll(".square");
 const winnerMsg = document.querySelector("#winner-msg");
 const playBtn = document.querySelector("#play-btn");
 const selectionModal = document.querySelector("#selection-modal");
+const choiceModal = document.querySelector("#choice-modal");
 let currentPlayer;
 let winner = "";
 let board = ["", "", "", "", "", "", "", "", ""];
 
 function updateBoard() {
   gridBox.forEach((grid, i) => (grid.textContent = board[i]));
+}
+
+function hideChoiceModal() {
+  choiceModal.style.display = "none";
+}
+
+function playPlayer() {
+  hideChoiceModal();
+  document.querySelector("#computer-choices").style.display = "none";
+}
+function playComputer() {
+  hideChoiceModal();
+  document.querySelector("#opponent-title").innerHTML = "Computer";
+  document.querySelector("#player2-alias-input").style.display = "none";
 }
 
 function changePlayer() {
