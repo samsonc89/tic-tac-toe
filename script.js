@@ -163,6 +163,7 @@ document
 
 playBtn.addEventListener("click", (e) => {
   const player1Input = document.querySelector("#player1-alias-input");
+  const player2Input = document.querySelector("#player2-alias-input");
   e.preventDefault();
   selectionModal.style.display = "none";
   player1Name.innerHTML =
@@ -171,7 +172,6 @@ playBtn.addEventListener("click", (e) => {
 
   switch (playerChoice) {
     case "human":
-      const player2Input = document.querySelector("#player2-alias-input");
       player2Name.innerHTML =
         player2Input.value != "" ? player2Input.value : "Player 2";
 
@@ -181,4 +181,5 @@ playBtn.addEventListener("click", (e) => {
       player2Name.innerHTML = "Computer";
       player2.playerAlias = "Computer";
   }
+  player1Input.value = player2Input.value = "";
 });
