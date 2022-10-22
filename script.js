@@ -17,7 +17,7 @@ const gameboard = (() => {
 
   function clearBoard() {
     gameboard.board = ["", "", "", "", "", "", "", "", ""];
-    updateBoard();
+    displayController.updateBoard();
     gameboard.player1.resetPlayerArray();
     gameboard.player2.resetPlayerArray();
     whoGoesFirst =
@@ -47,13 +47,13 @@ const gameboard = (() => {
       } else {
         console.log("Invalid square");
       }
-      updateBoard();
+      displayController.updateBoard();
     }
     function resetPlayerArray() {
       playerArray = [];
     }
     function resetPlayerScore() {
-      playerScore = 0;
+      this.playerScore = 0;
     }
 
     return {
@@ -72,28 +72,29 @@ const gameboard = (() => {
   return { player1, player2, board, clearBoard };
 })();
 
-function updateBoard() {
-  gridBox.forEach((grid, i) => (grid.textContent = gameboard.board[i]));
-}
-
-function hideChoiceModal() {
-  choiceModal.style.display = "none";
-}
-
-function playPlayer() {
-  playerChoice = "human";
-  hideChoiceModal();
-  document.querySelector("#computer-choices").style.display = "none";
-  document.querySelector("#opponent-title").innerHTML = "Player 2";
-  document.querySelector("#player2-name-input").style.display = "block";
-}
-function playComputer() {
-  playerChoice = "computer";
-  hideChoiceModal();
-  document.querySelector("#opponent-title").innerHTML = "Computer";
-  document.querySelector("#computer-choices").style.display = "block";
-  document.querySelector("#player2-name-input").style.display = "none";
-}
+const displayController = (() => {
+  function updateBoard() {
+    gridBox.forEach((grid, i) => (grid.textContent = gameboard.board[i]));
+  }
+  function hideChoiceModal() {
+    choiceModal.style.display = "none";
+  }
+  function playPlayer() {
+    playerChoice = "human";
+    hideChoiceModal();
+    document.querySelector("#computer-choices").style.display = "none";
+    document.querySelector("#opponent-title").innerHTML = "Player 2";
+    document.querySelector("#player2-name-input").style.display = "block";
+  }
+  function playComputer() {
+    playerChoice = "computer";
+    hideChoiceModal();
+    document.querySelector("#opponent-title").innerHTML = "Computer";
+    document.querySelector("#computer-choices").style.display = "block";
+    document.querySelector("#player2-name-input").style.display = "none";
+  }
+  return { updateBoard, playComputer, playPlayer };
+})();
 
 function changePlayer() {
   if (currentPlayer == gameboard.player1) {
@@ -175,7 +176,7 @@ const Player = (position, symbol, name) => {
     } else {
       console.log("Invalid square");
     }
-    updateBoard();
+    displayController.updateBoard();
   }
   function resetPlayerArray() {
     playerArray = [];
