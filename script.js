@@ -5,8 +5,8 @@ const winnerMsg = document.querySelector("#winner-msg");
 const playBtn = document.querySelector("#play-btn");
 const selectionModal = document.querySelector("#selection-modal");
 const choiceModal = document.querySelector("#choice-modal");
-const player1Name = document.querySelector("#player1-name");
-const player2Name = document.querySelector("#player2-name");
+const player1NameElem = document.querySelector("#player1-name");
+const player2NameElem = document.querySelector("#player2-name");
 let playerChoice;
 let currentPlayer;
 let whoGoesFirst;
@@ -28,14 +28,14 @@ function playPlayer() {
   hideChoiceModal();
   document.querySelector("#computer-choices").style.display = "none";
   document.querySelector("#opponent-title").innerHTML = "Player 2";
-  document.querySelector("#player2-alias-input").style.display = "block";
+  document.querySelector("#player2-name-input").style.display = "block";
 }
 function playComputer() {
   playerChoice = "computer";
   hideChoiceModal();
   document.querySelector("#opponent-title").innerHTML = "Computer";
   document.querySelector("#computer-choices").style.display = "block";
-  document.querySelector("#player2-alias-input").style.display = "none";
+  document.querySelector("#player2-name-input").style.display = "none";
 }
 
 function changePlayer() {
@@ -73,7 +73,7 @@ function checkForWinner(array) {
       document.querySelector(
         `#${currentPlayer.playerPosition}-score`
       ).textContent = `${currentPlayer.playerScore}`;
-      winnerMsg.innerHTML = currentPlayer.playerAlias + " Wins";
+      winnerMsg.innerHTML = currentPlayer.playerName + " Wins";
 
       // `${
       //   winner.playerPosition[0].toUpperCase() +
@@ -109,10 +109,10 @@ function reset() {
     .forEach((score) => (score.innerHTML = 0));
 }
 
-const Player = (position, symbol, alias) => {
+const Player = (position, symbol, name) => {
   const playerPosition = position;
   const playerSymbol = symbol;
-  let playerAlias = alias;
+  let playerName = name;
   let playerArray = [];
   let playerScore = 0;
 
@@ -139,7 +139,7 @@ const Player = (position, symbol, alias) => {
   }
 
   return {
-    playerAlias,
+    playerName,
     playerPosition,
     pickSquare,
     playerSymbol,
@@ -162,22 +162,22 @@ document
   .forEach((button) => button.addEventListener("click", reset));
 
 playBtn.addEventListener("click", (e) => {
-  const player1Input = document.querySelector("#player1-alias-input");
-  const player2Input = document.querySelector("#player2-alias-input");
+  const player1Input = document.querySelector("#player1-name-input");
+  const player2Input = document.querySelector("#player2-name-input");
   e.preventDefault();
   selectionModal.style.display = "none";
-  player1Name.innerHTML = player1.playerAlias =
+  player1NameElem.innerHTML = player1.playerName =
     player1Input.value != "" ? player1Input.value : "Player 1";
 
   switch (playerChoice) {
     case "human":
-      player2Name.innerHTML = player2.playerAlias =
+      player2NameElem.innerHTML = player2.playerName =
         player2Input.value != "" ? player2Input.value : "Player 2";
 
       break;
     case "computer":
-      player2Name.innerHTML = "Computer";
-      player2.playerAlias = "Computer";
+      player2NameElem.innerHTML = "Computer";
+      player2.playerName = "Computer";
   }
   player1Input.value = player2Input.value = "";
 });

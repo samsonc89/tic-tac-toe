@@ -16,18 +16,18 @@
             <div class="avatar-wrapper"><img src="" /></div>
             <h3>Player 1</h3>
             <input
-              class="alias-input"
+              class="name-input"
               placeholder="Player Name"
-              id="player1-alias-input"
+              id="player1-name-input"
             />
           </div>
           <div class="selection">
             <div class="avatar-wrapper"><img src="" /></div>
             <h3 id="opponent-title">Player 2</h3>
             <input
-              class="alias-input"
+              class="name-input"
               placeholder="Player Name"
-              id="player2-alias-input"
+              id="player2-name-input"
             />
             <div id="computer-choices">
               <button id="computer-easy">Easy</button>
@@ -60,18 +60,18 @@
       <div id="players-wrapper">
         <div id="player1-wrapper">
           <div id="player1-name">Player 1</div>
-          <div id="player1-score">0</div>
+          <div class="score-display" id="player1-score">0</div>
         </div>
         <div id="game-message"></div>
         <div id="player2-wrapper">
           <div id="player2-name">Player 2</div>
-          <div id="player2-score">0</div>
+          <div class="score-display" id="player2-score">0</div>
         </div>
       </div>
       <div id="extras-wrapper">
         <div id="winner-msg"></div>
         <div id="reset-wrapper">
-          <button id="reset" onclick="clearBoard()">Reset</button>
+          <button id="reset" onclick="clearBoard()">Play Again</button>
           <button class="change-players">Change Players</button>
         </div>
       </div>
