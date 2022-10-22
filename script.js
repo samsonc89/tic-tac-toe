@@ -96,6 +96,9 @@ function reset() {
   player2.resetPlayerScore();
   selectionModal.style.display = "block";
   choiceModal.style.display = "block";
+  document
+    .querySelectorAll(".score-display")
+    .forEach((score) => (score.innerHTML = 0));
 }
 
 const Player = (position, symbol, alias) => {
@@ -145,6 +148,7 @@ currentPlayer = player1;
 //go through each element in the winning array and check if it's within testArr
 
 gridBox.forEach((square) => square.addEventListener("click", markSquare));
+
 document
   .querySelectorAll(".change-players")
   .forEach((button) => button.addEventListener("click", reset));
