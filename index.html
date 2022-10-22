@@ -9,20 +9,22 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <div id="main-wrapper">
-      <div id="choice-modal">
-        <div class="modal-content">
-          <div class="selection-wrapper">
+    <div id="choice-modal">
+      <div class="modal-content">
+        <div id="selection-wrapper">
+          <div class="selection">
             <div class="avatar-wrapper"><img src="" /></div>
           </div>
-          <div class="selection-wrapper">
+          <div class="selection">
             <div class="avatar-wrapper"><img src="" /></div>
             <button id="human-selection">Human</button>
             <button id="computer-selection">Computer</button>
           </div>
         </div>
+        <button id="play-btn">Play</button>
       </div>
-
+    </div>
+    <div id="main-wrapper">
       <div id="gameboard-wrapper">
         <div class="square" id="square0"></div>
         <div class="square" id="square1"></div>
