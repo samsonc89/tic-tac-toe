@@ -26,7 +26,7 @@
 
 #choice-modal {
   z-index: 1;
-  display: block;
+  display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -75,4 +75,8 @@
   margin-top: 8%;
   display: flex;
   justify-content: space-around;
+}
+#extras-wrapper {
+  justify-self: center;
+  text-align: center;
 }
