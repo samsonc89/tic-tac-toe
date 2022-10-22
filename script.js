@@ -8,12 +8,12 @@ const choiceModal = document.querySelector("#choice-modal");
 const player1NameElem = document.querySelector("#player1-name");
 const player2NameElem = document.querySelector("#player2-name");
 let playerChoice;
-let currentPlayer;
-let whoGoesFirst;
-let winner = "";
 
 const gameboard = (() => {
   let board = ["", "", "", "", "", "", "", "", ""];
+  let whoGoesFirst;
+  let currentPlayer;
+  let winner = "";
 
   function clearBoard() {
     gameboard.board = ["", "", "", "", "", "", "", "", ""];
@@ -22,15 +22,15 @@ const gameboard = (() => {
     gameboard.player2.resetPlayerArray();
     whoGoesFirst =
       whoGoesFirst == gameboard.player1 ? gameboard.player2 : gameboard.player1;
-    currentPlayer = whoGoesFirst;
-    winner = "";
+    gameboard.currentPlayer = whoGoesFirst;
+    gameboard.winner = "";
     winnerMsg.innerHTML = "";
   }
   function changePlayer() {
-    if (currentPlayer == gameboard.player1) {
-      currentPlayer = gameboard.player2;
+    if (gameboard.currentPlayer == gameboard.player1) {
+      gameboard.currentPlayer = gameboard.player2;
     } else {
-      currentPlayer = gameboard.player1;
+      gameboard.currentPlayer = gameboard.player1;
     }
   }
 
@@ -91,27 +91,37 @@ const gameboard = (() => {
     for (const winningCombination of winningCombinations) {
       // Every number in the winningCombination is also in the provided array
       if (winningCombination.every((element) => array.includes(element))) {
-        winner = currentPlayer;
-        currentPlayer.playerScore++;
+        gameboard.winner = gameboard.currentPlayer;
+        gameboard.currentPlayer.playerScore++;
         document.querySelector(
-          `#${currentPlayer.playerPosition}-score`
-        ).textContent = `${currentPlayer.playerScore}`;
-        winnerMsg.innerHTML = currentPlayer.playerName + " Wins";
-
-        // `${
-        //   winner.playerPosition[0].toUpperCase() +
-        //   winner.playerPosition.substring(1)
-        // } Wins`;
+          `#${gameboard.currentPlayer.playerPosition}-score`
+        ).textContent = `${gameboard.currentPlayer.playerScore}`;
+        winnerMsg.innerHTML = gameboard.currentPlayer.playerName + " Wins";
       }
     }
     // No complete match
     return false;
   }
 
+  function reset() {
+    gameboard.clearBoard();
+    gameboard.currentPlayer = whoGoesFirst = gameboard.player1;
+    playerChoice = "";
+    gameboard.player1.resetPlayerScore();
+    gameboard.player2.resetPlayerScore();
+    selectionModal.style.display = "block";
+    choiceModal.style.display = "block";
+    document
+      .querySelectorAll(".score-display")
+      .forEach((score) => (score.innerHTML = 0));
+  }
+
   const player1 = Player("player1", "X", "Player 1");
   const player2 = Player("player2", "O", "Player 2");
-  return { player1, player2, board, clearBoard };
+  currentPlayer = player1;
+  return { player1, player2, board, clearBoard, reset, currentPlayer, winner };
 })();
+// currentPlayer = whoGoesFirst = gameboard.player1;
 
 const displayController = (() => {
   function updateBoard() {
@@ -136,29 +146,12 @@ const displayController = (() => {
   }
 
   function markSquare() {
-    if (winner === "") {
-      currentPlayer.pickSquare();
+    if (gameboard.winner == "") {
+      gameboard.currentPlayer.pickSquare();
     }
   }
   return { updateBoard, playComputer, playPlayer, markSquare };
 })();
-
-function reset() {
-  gameboard.clearBoard();
-  currentPlayer = whoGoesFirst = gameboard.player1;
-  playerChoice = "";
-  gameboard.player1.resetPlayerScore();
-  gameboard.player2.resetPlayerScore();
-  selectionModal.style.display = "block";
-  choiceModal.style.display = "block";
-  document
-    .querySelectorAll(".score-display")
-    .forEach((score) => (score.innerHTML = 0));
-}
-
-currentPlayer = whoGoesFirst = gameboard.player1;
-
-//go through each element in the winning array and check if it's within testArr
 
 gridBox.forEach((square) =>
   square.addEventListener("click", displayController.markSquare)
@@ -166,7 +159,7 @@ gridBox.forEach((square) =>
 
 document
   .querySelectorAll(".change-players")
-  .forEach((button) => button.addEventListener("click", reset));
+  .forEach((button) => button.addEventListener("click", gameboard.reset));
 
 playBtn.addEventListener("click", (e) => {
   const player1Input = document.querySelector("#player1-name-input");
