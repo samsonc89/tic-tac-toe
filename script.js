@@ -14,6 +14,7 @@ const gameboard = (() => {
   let whoGoesFirst;
   let currentPlayer;
   let winner = "";
+  //HOW DO YOU SET A FUCNTION THAT SETS WINNER SO YOU CAN"T SET IT FROM OUTSIDE
 
   function clearBoard() {
     gameboard.board = ["", "", "", "", "", "", "", "", ""];
@@ -181,3 +182,19 @@ playBtn.addEventListener("click", (e) => {
   }
   player1Input.value = player2Input.value = "";
 });
+
+function computerMove() {
+  let randomMove = Math.floor(Math.random() * 9);
+
+  if (gameboard.board[randomMove] == "") {
+    gameboard.board[randomMove] = "O";
+    console.log(randomMove);
+    displayController.updateBoard();
+  } else computerMove();
+}
+
+function setComputer(mode) {
+  //set computer to
+  //easy mode - randomly select square
+  //impossible - minmax logic
+}
