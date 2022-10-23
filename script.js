@@ -193,14 +193,20 @@ playBtn.addEventListener("click", (e) => {
 });
 
 function computerMove() {
-  let randomMove = Math.floor(Math.random() * 9);
+  if (
+    gameboard.winner == "" &&
+    gameboard.currentPlayer.playerPosition == "player2" &&
+    gameboard.currentPlayer.playerName == "Computer"
+  ) {
+    let randomMove = Math.floor(Math.random() * 9);
 
-  if (gameboard.board[randomMove] == "") {
-    gameboard.board[randomMove] = "O";
-    console.log(randomMove);
-    displayController.updateBoard();
-    gameboard.changePlayer();
-  } else computerMove();
+    if (gameboard.board[randomMove] == "") {
+      gameboard.board[randomMove] = "O";
+      console.log(randomMove);
+      displayController.updateBoard();
+      gameboard.changePlayer();
+    } else computerMove();
+  }
 }
 
 function setComputer(mode) {
