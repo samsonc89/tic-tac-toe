@@ -107,6 +107,15 @@ const gameboard = (() => {
     ];
 
     // Each of the nested arrays in winningArray
+    if (!gameboard.board.includes("")) {
+      for (const winningCombination of winningCombinations) {
+        // Every number in the winningCombination is also in the provided array
+        if (!winningCombination.every((element) => array.includes(element))) {
+          winnerMsg.innerHTML = "Tie Game!";
+        }
+      }
+    }
+
     for (const winningCombination of winningCombinations) {
       // Every number in the winningCombination is also in the provided array
       if (winningCombination.every((element) => array.includes(element))) {
@@ -150,7 +159,6 @@ const gameboard = (() => {
     changePlayer,
   };
 })();
-// currentPlayer = whoGoesFirst = gameboard.player1;
 
 const displayController = (() => {
   function updateBoard() {
