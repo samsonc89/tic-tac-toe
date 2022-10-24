@@ -137,7 +137,8 @@ const gameboard = (() => {
 
   const player1 = Player("player1", "X", "Player 1");
   const player2 = Player("player2", "O", "Player 2");
-  currentPlayer = player1;
+
+  whoGoesFirst = currentPlayer = player1;
   return {
     player1,
     player2,
@@ -174,17 +175,6 @@ const displayController = (() => {
   }
 
   function markSquare() {
-    //   if (
-    //     gameboard.winner == "" &&
-    //     gameboard.currentPlayer.playerPosition == "player2" &&
-    //     gameboard.currentPlayer.playerName == "Computer"
-    //   ) {
-    //     computerMove();
-    //   } else {
-    //     gameboard.currentPlayer.pickSquare();
-    //     markSquare();
-    //   }
-    // }
     if (gameboard.winner == "") {
       if (
         gameboard.currentPlayer.playerPosition == "player2" &&
