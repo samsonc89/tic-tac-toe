@@ -45,14 +45,15 @@ const gameboard = (() => {
 
     function computerMove() {
       let randomMove = Math.floor(Math.random() * 9);
-
-      if (gameboard.board[randomMove] == "") {
-        gameboard.board[randomMove] = "O";
-        playerArray.push(randomMove);
-        checkForWinner(playerArray);
-        displayController.updateBoard();
-        gameboard.changePlayer();
-      } else computerMove();
+      if (gameboard.winner == "") {
+        if (gameboard.board[randomMove] == "") {
+          gameboard.board[randomMove] = "O";
+          playerArray.push(randomMove);
+          checkForWinner(playerArray);
+          displayController.updateBoard();
+          gameboard.changePlayer();
+        } else computerMove();
+      }
     }
 
     function pickSquare() {
@@ -111,7 +112,7 @@ const gameboard = (() => {
       for (const winningCombination of winningCombinations) {
         // Every number in the winningCombination is also in the provided array
         if (!winningCombination.every((element) => array.includes(element))) {
-          winnerMsg.innerHTML = "Tie Game!";
+          winnerMsg.innerHTML = "Stalemate!";
         }
       }
     }
