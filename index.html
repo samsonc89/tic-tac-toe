@@ -41,8 +41,20 @@
     </div>
     <div id="choice-modal">
       <div class="modal-content">
-        <button class="setup-btn" id="pvp" onclick="playPlayer()">PVP</button>
-        <button class="setup-btn" id="pvc" onclick="playComputer()">PVC</button>
+        <button
+          class="setup-btn"
+          id="pvp"
+          onclick="displayController.playPlayer()"
+        >
+          PVP
+        </button>
+        <button
+          class="setup-btn"
+          id="pvc"
+          onclick="displayController.playComputer()"
+        >
+          PVC
+        </button>
       </div>
     </div>
     <div id="main-wrapper">
@@ -71,8 +83,11 @@
       <div id="extras-wrapper">
         <div id="winner-msg"></div>
         <div id="reset-wrapper">
-          <button id="reset" onclick="clearBoard()">Play Again</button>
+          <button id="reset" onclick="gameboard.clearBoard()">
+            Play Again
+          </button>
           <button class="change-players">Change Players</button>
+          <button onclick="computerMove()">Test Move</button>
         </div>
       </div>
     </div>
