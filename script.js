@@ -26,6 +26,7 @@ const gameboard = (() => {
     gameboard.currentPlayer = whoGoesFirst;
     gameboard.winner = "";
     winnerMsg.innerHTML = "";
+    displayController.markSquare();
   }
   function changePlayer() {
     if (gameboard.currentPlayer == gameboard.player1) {
@@ -42,6 +43,18 @@ const gameboard = (() => {
     let playerArray = [];
     let playerScore = 0;
 
+    function computerMove() {
+      let randomMove = Math.floor(Math.random() * 9);
+
+      if (gameboard.board[randomMove] == "") {
+        gameboard.board[randomMove] = "O";
+        playerArray.push(randomMove);
+        checkForWinner(playerArray);
+        displayController.updateBoard();
+        gameboard.changePlayer();
+      } else computerMove();
+    }
+
     function pickSquare() {
       //get the id and get the last digit and store into variable
       let boardIndex = Number(event.target.id[event.target.id.length - 1]);
@@ -52,11 +65,15 @@ const gameboard = (() => {
         playerArray.push(boardIndex);
         checkForWinner(playerArray);
         changePlayer();
+        if (gameboard.currentPlayer.playerName == "Computer") {
+          gameboard.currentPlayer.computerMove();
+        }
       } else {
-        console.log("Invalid square");
+        return;
       }
       displayController.updateBoard();
     }
+
     function resetPlayerArray() {
       playerArray = [];
     }
@@ -73,6 +90,7 @@ const gameboard = (() => {
       playerScore,
       resetPlayerScore,
       playerArray,
+      computerMove,
     };
   };
 
@@ -156,8 +174,26 @@ const displayController = (() => {
   }
 
   function markSquare() {
+    //   if (
+    //     gameboard.winner == "" &&
+    //     gameboard.currentPlayer.playerPosition == "player2" &&
+    //     gameboard.currentPlayer.playerName == "Computer"
+    //   ) {
+    //     computerMove();
+    //   } else {
+    //     gameboard.currentPlayer.pickSquare();
+    //     markSquare();
+    //   }
+    // }
     if (gameboard.winner == "") {
-      gameboard.currentPlayer.pickSquare();
+      if (
+        gameboard.currentPlayer.playerPosition == "player2" &&
+        gameboard.currentPlayer.playerName == "Computer"
+      ) {
+        gameboard.currentPlayer.computerMove();
+      } else {
+        gameboard.currentPlayer.pickSquare();
+      }
     }
   }
   return { updateBoard, playComputer, playPlayer, markSquare };
@@ -191,23 +227,6 @@ playBtn.addEventListener("click", (e) => {
   }
   player1Input.value = player2Input.value = "";
 });
-
-function computerMove() {
-  if (
-    gameboard.winner == "" &&
-    gameboard.currentPlayer.playerPosition == "player2" &&
-    gameboard.currentPlayer.playerName == "Computer"
-  ) {
-    let randomMove = Math.floor(Math.random() * 9);
-
-    if (gameboard.board[randomMove] == "") {
-      gameboard.board[randomMove] = "O";
-      console.log(randomMove);
-      displayController.updateBoard();
-      gameboard.changePlayer();
-    } else computerMove();
-  }
-}
 
 function setComputer(mode) {
   //set computer to
