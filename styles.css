@@ -149,6 +149,16 @@ input {
   font-size: 2rem;
 }
 #extras-wrapper {
-  justify-self: center;
   text-align: center;
+}
+
+#winner-msg {
+  height: 1.5rem;
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+.game-buttons {
+  display: grid;
+  gap: 15px;
+  justify-items: center;
 }
