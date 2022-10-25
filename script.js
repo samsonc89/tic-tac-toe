@@ -31,8 +31,16 @@ const gameboard = (() => {
   function changePlayer() {
     if (gameboard.currentPlayer == gameboard.player1) {
       gameboard.currentPlayer = gameboard.player2;
+      document.querySelector(
+        "#player2-wrapper "
+      ).style.boxShadow = `0px 0px 5px 8px rgb(223, 223, 223)`;
+      document.querySelector("#player1-wrapper ").style.boxShadow = `none`;
     } else {
       gameboard.currentPlayer = gameboard.player1;
+      document.querySelector(
+        "#player1-wrapper "
+      ).style.boxShadow = `0px 0px 5px 8px rgb(223, 223, 223)`;
+      document.querySelector("#player2-wrapper ").style.boxShadow = `none`;
     }
   }
 
