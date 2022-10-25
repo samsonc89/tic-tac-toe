@@ -1,19 +1,27 @@
+:root {
+  --main-pink: #f26bc3;
+  --main-blue: #9bc1f2;
+  --main-green: #40df78;
+  --main-yellow: #f2cb57;
+}
+
 * {
   margin: 0;
   padding: 0;
   text-align: center;
 }
 button {
-  background-color: #7887e0;
+  background-color: var(--main-yellow);
 }
 body,
 .modal-content {
-  background-color: #302a4e;
-  color: #d54aa4;
+  background-color: var(--main-blue);
+  color: var(black);
 }
 h1 {
   margin-top: 5vh;
 }
+
 #main-wrapper {
   width: 80%;
   display: grid;
@@ -21,9 +29,11 @@ h1 {
   margin: auto;
 }
 #gameboard-wrapper {
+  background-color: white;
   margin-top: 5%;
   position: relative;
-  border: 1px solid black;
+  border: 3px solid black;
+
   /* aspect-ratio: 1/1; */
   width: 50vw;
   height: 50vw;
@@ -88,9 +98,11 @@ h1 {
 
 .square {
   box-sizing: border-box;
+  box-shadow: none;
+
   width: calc(100% / 3);
   height: calc(100% / 3);
-  border: 1px solid black;
+  border: 3px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
