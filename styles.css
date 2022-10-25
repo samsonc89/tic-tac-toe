@@ -9,6 +9,7 @@
   margin: 0;
   padding: 0;
   text-align: center;
+  border-radius: 10px;
 }
 button {
   background-color: var(--main-yellow);
@@ -33,7 +34,7 @@ h1 {
   margin-top: 5%;
   position: relative;
   border: 3px solid black;
-
+  box-sizing: border-box;
   /* aspect-ratio: 1/1; */
   width: 50vw;
   height: 50vw;
@@ -99,10 +100,10 @@ h1 {
 .square {
   box-sizing: border-box;
   box-shadow: none;
-
+  border-radius: 0;
   width: calc(100% / 3);
   height: calc(100% / 3);
-  border: 3px solid black;
+  border: 2px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,6 +114,13 @@ h1 {
   margin-top: 8%;
   display: flex;
   justify-content: space-around;
+}
+
+.player-wrapper {
+  background-color: white;
+  border: 2px solid black;
+  width: 15vh;
+  height: 8vh;
 }
 #extras-wrapper {
   justify-self: center;
