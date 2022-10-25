@@ -3,9 +3,13 @@
   padding: 0;
   text-align: center;
 }
+button {
+  background-color: #7887e0;
+}
 body,
 .modal-content {
   background-color: #302a4e;
+  color: #d54aa4;
 }
 #main-wrapper {
   width: 80%;
