@@ -46,8 +46,10 @@
             </div>
           </div>
         </div>
-        <button id="play-btn">Play</button>
-        <button class="change-players">Change Players</button>
+        <div class="game-buttons">
+          <button id="play-btn">Play</button>
+          <button class="change-players">Change Players</button>
+        </div>
       </div>
     </div>
     <div id="choice-modal">
@@ -113,7 +115,7 @@
       </div>
       <div id="extras-wrapper">
         <div id="winner-msg"></div>
-        <div id="reset-wrapper">
+        <div class="game-buttons">
           <button id="reset" onclick="gameboard.clearBoard()">
             Play Again
           </button>
