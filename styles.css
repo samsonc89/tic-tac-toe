@@ -41,7 +41,7 @@ h1 {
   width: 80%;
   display: grid;
   justify-self: center;
-  margin: auto;
+  margin: 0 auto 20px auto;
 }
 #gameboard-wrapper {
   background-color: white;
