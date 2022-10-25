@@ -163,7 +163,10 @@ const gameboard = (() => {
 
 const displayController = (() => {
   function updateBoard() {
-    gridBox.forEach((grid, i) => (grid.textContent = gameboard.board[i]));
+    gridBox.forEach((grid, i) => {
+      grid.textContent = gameboard.board[i];
+      grid.style.color = gameboard.board[i] == "X" ? "#F26BC3" : "#85AAF2";
+    });
   }
   function hideChoiceModal() {
     choiceModal.style.display = "none";
