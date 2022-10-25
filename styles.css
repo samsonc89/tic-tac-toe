@@ -11,6 +11,9 @@ body,
   background-color: #302a4e;
   color: #d54aa4;
 }
+h1 {
+  margin-top: 5vh;
+}
 #main-wrapper {
   width: 80%;
   display: grid;
@@ -18,7 +21,7 @@ body,
   margin: auto;
 }
 #gameboard-wrapper {
-  margin-top: 10%;
+  margin-top: 5%;
   position: relative;
   border: 1px solid black;
   /* aspect-ratio: 1/1; */
